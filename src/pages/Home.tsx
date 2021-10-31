@@ -50,7 +50,7 @@ export const Home = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>
+      <Text testID="welcome" style={styles.title}>
         Welcome, Sup3r-Us3r
       </Text>
 
@@ -59,6 +59,7 @@ export const Home = () => {
       </Text>
 
       <TextInput
+        testID="input-skill"
         style={styles.input}
         placeholder="New skill"
         placeholderTextColor="#555"
@@ -66,6 +67,7 @@ export const Home = () => {
       />
 
       <Button
+        testID="button-add-new-skill"
         title="Add"
         onPress={handleAddNewSkill}
       />
@@ -74,16 +76,21 @@ export const Home = () => {
         MySkills
       </Text>
 
-      <FlatList
-        data={mySkills}
-        keyExtractor={item => item.id}
-        renderItem={({ item }) => (
-          <SkillCard
-            skill={item.name}
-            onPress={() => handleRemoveSkill(item.id)}
-          />
-        )}
-      />
+      {
+        mySkills &&
+        <FlatList
+          testID="flat-list-skills"
+          data={mySkills}
+          keyExtractor={item => item.id}
+          renderItem={({ item }) => (
+            <SkillCard
+              skill={item.name}
+              onPress={() => handleRemoveSkill(item.id)}
+            />
+          )}
+          keyboardShouldPersistTaps="never"
+        />
+      }
     </View>
   );
 };
